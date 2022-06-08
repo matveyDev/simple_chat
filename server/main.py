@@ -13,7 +13,8 @@ async def websocket_endpoint(websocket: WebSocket):
 
     try:
         while True:
-            message = await websocket.receive_text()
+            message = await websocket.receive_json()
+            message = message['message']
             data = await message_manager.get_data_to_send(message, websocket)
             await connection_manager.broadcast(data)
 
