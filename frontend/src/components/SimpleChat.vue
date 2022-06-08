@@ -50,7 +50,8 @@ export default {
   },
   methods: {
     sendMessage() {
-      this.connection.send(this.message);
+      const message_json = JSON.stringify({ message: this.message });
+      this.connection.send(message_json);
       this.message = "";
     },
   },
