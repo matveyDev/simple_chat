@@ -22,11 +22,11 @@ class ConnectionManager:
 
 class MessageManager:
     def __init__(self):
-        self.messages = defaultdict(int)
+        self.message_counter = 0
 
-    async def get_data_to_send(self, message, websocket: WebSocket) -> dict:
-        self.messages[websocket] += 1
-        id_message = self.messages[websocket]
+    async def get_data_to_send(self, message: str) -> dict:
+        self.message_counter += 1
+        id_message = self.message_counter
         data = {
             "id": id_message,
             "message": message
