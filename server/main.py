@@ -15,8 +15,10 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             message = await websocket.receive_json()
             message = message['message']
-            data = await message_manager.get_data_to_send(message, websocket)
+
+            data = await message_manager.get_data_to_send(message)
             await connection_manager.broadcast(data)
 
     except WebSocketDisconnect:
         connection_manager.disconnect(websocket)
+        del message_manager
